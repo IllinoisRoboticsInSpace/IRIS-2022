@@ -17,6 +17,9 @@ setup(
 
         # Path to the world file
         (os.path.join('share', package_name,'worlds/'), glob('./worlds/*')),
+
+        # Path to model files
+        (os.path.join('share', package_name,'models/arena_walls'), glob('./models/arena_walls/*')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,

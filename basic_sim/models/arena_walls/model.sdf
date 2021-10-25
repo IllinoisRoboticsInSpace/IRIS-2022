@@ -20,7 +20,6 @@
         </geometry>
         <material>
           <script>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
             <name>Gazebo/Wood</name>
           </script>
           <ambient>1 1 1 1</ambient>
@@ -49,7 +48,6 @@
         </geometry>
         <material>
           <script>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
             <name>Gazebo/Wood</name>
           </script>
           <ambient>1 1 1 1</ambient>
@@ -78,7 +76,6 @@
         </geometry>
         <material>
           <script>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
             <name>Gazebo/Wood</name>
           </script>
           <ambient>1 1 1 1</ambient>
@@ -107,7 +104,6 @@
         </geometry>
         <material>
           <script>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
             <name>Gazebo/Wood</name>
           </script>
           <ambient>1 1 1 1</ambient>
