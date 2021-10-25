@@ -15,7 +15,9 @@
     - `source ~/colcon_ws/install/setup.bash`
 
 ### Teleop Package Usage
-- TODO
+- `ros2 run teleop teleop_node.py`
+    - Launches the teleop node
+    - TODO: Create launch file
 
 ### Simulation Package Usage
 - `ros2 launch basic_sim arena_world.launch.py`
@@ -31,5 +33,5 @@
         IRIS-2022/
             basic_sim/
             py_pubsub/
-            joystick_sub/
+            teleop/
 ```

@@ -1,6 +1,6 @@
 from setuptools import setup
 
-package_name = 'joystick_sub'
+package_name = 'teleop'
 
 setup(
     name=package_name,
@@ -13,14 +13,14 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='louis',
-    maintainer_email='25756888+LouisAsanaka@users.noreply.github.com',
-    description='TODO: Package description',
+    maintainer='iris-autonomous',
+    maintainer_email='iris@illinois.edu',
+    description='Teleop package for IRIS-2022',
     license='TODO: License declaration',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'subscriber = joystick_sub.subscriber:main', 
+            'teleop_node = teleop.teleop_node:main', # name = package.file:method
         ],
     },
 )
