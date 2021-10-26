@@ -8,7 +8,7 @@ from sensor_msgs.msg import Joy
 class TeleopNode(Node):
 
     def __init__(self):
-        super().__init__('teleop_node')
+        super().__init__('TeleopNode')
         self.subscription = self.create_subscription(
             Joy, '/joy', self.joystick_callback, 1)
         self.get_logger().info(f"Created node {self.get_name()}")
@@ -22,10 +22,13 @@ def main(args=None):
 
     teleop_node = TeleopNode()
 
-    rclpy.spin(teleop_node)
-
-    teleop_node.destroy_node()
-    rclpy.shutdown()
+    try:
+        rclpy.spin(teleop_node)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        teleop_node.destroy_node()
+        rclpy.shutdown()
 
 
 if __name__ == '__main__':
