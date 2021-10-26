@@ -3,9 +3,9 @@
 <package format="3">
   <name>basic_sim</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
-  <maintainer email="iris@todo.todo">iris</maintainer>
-  <license>TODO: License declaration</license>
+  <description>A basic ros2/gazebo simulation package for the NASA RMC Arena</description>
+  <maintainer email="iris.uiuc@gmail.com">Illinois Robotics in Space Team</maintainer>
+  <license>MIT</license>
 
   <exec_depend>rclpy</exec_depend>
   <exec_depend>std_msgs</exec_depend>
