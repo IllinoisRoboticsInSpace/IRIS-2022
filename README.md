@@ -18,8 +18,11 @@
 - TODO
 
 ### Simulation Package Usage
-- `ros2 launch basic_sim arena_world.launch.py`
-    - Launches gazebo with the arena world
+- Terminal 1: `ros2 launch basic_sim arena_world.launch.py`
+    - Launches gazebo with the basic arena world(Skid-steer model rover + arena walls + flat ground)
+- Terminal 2: `ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args --remap /cmd_vel:=/rover/cmd_vel`
+    - Control the rover model with your keyboard
+    - Start at a low speed to prevent rover from jumping all over the place
 
 ### End Package Folder Structure
 ```
