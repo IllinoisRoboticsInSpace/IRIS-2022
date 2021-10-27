@@ -25,9 +25,9 @@ def generate_launch_description():
                 'deadzone': 0.3,
                 'autorepeat_rate': 20.0,
             }]),
-        Node(
-            package='teleop_twist_joy', executable='teleop_node',
-            name='teleop_twist_joy_node', parameters=[config_filepath]),
+        # Node(
+        #     package='teleop_twist_joy', executable='teleop_node',
+        #     name='teleop_twist_joy_node', parameters=[config_filepath]),
         Node(
             package='teleop', executable='teleop_node',
             name='TeleopNode', parameters=[]),
