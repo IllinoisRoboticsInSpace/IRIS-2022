@@ -13,7 +13,7 @@
 - 0: A button
 - 1: B button
 - 2: X button
-- 3: Y butotn
+- 3: Y button
 - 4: Left trigger button
 - 5: Right trigger button
 - 6: Back button
