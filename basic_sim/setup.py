@@ -18,7 +18,7 @@ def get_data_files():
     return files
 
 def find_dir_files(dir_name):
-    """ Finds and returns a list of files in the given directory in the data_files format
+    """ Finds and returns a list of files in the given directory RECURSIVELY in the data_files format
     Example list element:  
     (   
         'share/basic_sim/models/arena_walls', 
@@ -31,12 +31,13 @@ def find_dir_files(dir_name):
         glob_path = filepath
         target_dir = os.path.dirname(filepath)
         if os.path.isdir(filepath):
-            glob_path = os.path.join(filepath, '*')
-            target_dir = filepath
-            
-        file_list.append(
-            (os.path.join('share', package_name, target_dir), glob(f"{glob_path}"))
-        )
+            file_list.extend(find_dir_files(filepath)) #recursive step
+            # glob_path = os.path.join(filepath, '*')
+            # target_dir = filepath
+        else:
+            file_list.append(
+                (os.path.join('share', package_name, target_dir), glob(f"{glob_path}"))
+            )
     return file_list
 
 setup(
@@ -53,6 +54,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'spawn_rocks = basic_sim.rock_spawner:main',
         ],
     },
 )
