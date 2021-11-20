@@ -24,7 +24,6 @@
   <model name="rover">  
      <!-- If true, physics engine will ignore -->
      <static>false</static>    
-     
        <!-- Add the rectangular base of the robot -->
        <link name='chassis'>
        
@@ -191,6 +190,7 @@
          </axis>
        </joint>
        <!-- Controls the differential drive robot -->
+       <!-- Useful docs: https://github.com/ros-simulation/gazebo_ros_pkgs/wiki/ROS-2-Migration:-Skid-Steer-drive -->
       <plugin name='skid_steer_drive' filename='libgazebo_ros_diff_drive.so'>
         <ros>
           <!-- Set namespace -->
@@ -202,7 +202,7 @@
         </ros>
 
         <!-- Update rate -->
-        <update_rate>500</update_rate>
+        <update_rate>100</update_rate>
 
         <!-- Number of wheel pairs -->
         <num_wheel_pairs>2</num_wheel_pairs>
@@ -223,8 +223,8 @@
         <wheel_diameter>0.2</wheel_diameter>
 
         <!-- limits -->
-        <max_wheel_torque>20</max_wheel_torque>
-        <max_wheel_acceleration>1.0</max_wheel_acceleration>
+        <max_wheel_torque>5</max_wheel_torque>
+        <max_wheel_acceleration>0.2</max_wheel_acceleration>
 
         <!-- output -->
         <publish_odom>true</publish_odom>

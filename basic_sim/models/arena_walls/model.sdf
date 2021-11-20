@@ -6,16 +6,16 @@
       <collision name='Wall_12_Collision'>
         <geometry>
           <box>
-            <size>6.8 0.05 1</size>
+            <size>6.8 0.05 0.25</size>
           </box>
         </geometry>
-        <pose>0 0 0.5 0 -0 0</pose>
+        <pose>0 0 0.125 0 -0 0</pose>
       </collision>
       <visual name='Wall_12_Visual'>
-        <pose>0 0 0.5 0 -0 0</pose>
+        <pose>0 0 0.125 0 -0 0</pose>
         <geometry>
           <box>
-            <size>6.8 0.05 1</size>
+            <size>6.8 0.05 0.25</size>
           </box>
         </geometry>
         <material>
@@ -34,16 +34,16 @@
       <collision name='Wall_26_Collision'>
         <geometry>
           <box>
-            <size>6.8 0.05 1</size>
+            <size>6.8 0.05 0.25</size>
           </box>
         </geometry>
-        <pose>0 0 0.5 0 -0 0</pose>
+        <pose>0 0 0.125 0 -0 0</pose>
       </collision>
       <visual name='Wall_26_Visual'>
-        <pose>0 0 0.5 0 -0 0</pose>
+        <pose>0 0 0.125 0 -0 0</pose>
         <geometry>
           <box>
-            <size>6.8 0.05 1</size>
+            <size>6.8 0.05 0.25</size>
           </box>
         </geometry>
         <material>
@@ -62,16 +62,16 @@
       <collision name='Wall_30_Collision'>
         <geometry>
           <box>
-            <size>2.55 0.05 1</size>
+            <size>2.55 0.05 0.25</size>
           </box>
         </geometry>
-        <pose>0 0 0.5 0 -0 0</pose>
+        <pose>0 0 0.125 0 -0 0</pose>
       </collision>
       <visual name='Wall_30_Visual'>
-        <pose>0 0 0.5 0 -0 0</pose>
+        <pose>0 0 0.125 0 -0 0</pose>
         <geometry>
           <box>
-            <size>2.55 0.05 1</size>
+            <size>2.55 0.05 0.25</size>
           </box>
         </geometry>
         <material>
@@ -90,16 +90,16 @@
       <collision name='Wall_32_Collision'>
         <geometry>
           <box>
-            <size>2.55 0.05 1</size>
+            <size>2.55 0.05 0.25</size>
           </box>
         </geometry>
-        <pose>0 0 0.5 0 -0 0</pose>
+        <pose>0 0 0.125 0 -0 0</pose>
       </collision>
       <visual name='Wall_32_Visual'>
-        <pose>0 0 0.5 0 -0 0</pose>
+        <pose>0 0 0.125 0 -0 0</pose>
         <geometry>
           <box>
-            <size>2.55 0.05 1</size>
+            <size>2.55 0.05 0.25</size>
           </box>
         </geometry>
         <material>
@@ -114,6 +114,6 @@
       </visual>
       <pose>3.375 0 0 0 -0 1.5708</pose>
     </link>
-    <static>1</static>
+    <static>1</static>    
   </model>
 </sdf>

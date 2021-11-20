@@ -50,7 +50,6 @@
       <iterations>143328</iterations>
       <model name='arena_walls'>
         <pose>0 0 0 0 -0 0</pose>
-        <scale>1 1 0.25</scale>
       </model>
       <light name='sun'>
         <pose>0 0 10 0 -0 0</pose>
