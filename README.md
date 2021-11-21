@@ -26,7 +26,7 @@
 - Terminal 2: `ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args --remap /cmd_vel:=/rover/cmd_vel`
     - Control the rover model with your keyboard
     - Start at a low speed to prevent rover from jumping all over the place
-
+- Terminal 3: `rviz2 -d basic_sim/resource/rover_depth_camera_view.rviz` to view rover's depth camera data
 ### End Package Folder Structure
 ```
 ~/colcon_ws/
