@@ -39,7 +39,7 @@
                <box>
                  <!-- Box is 0.6 meters in length -->
                  <!-- 0.4 meters in width -->
-                 <!-- 0.4 meters in height -->
+                 <!-- 0.2 meters in height -->
                  <size>0.6 0.4 0.2</size>
                </box>
              </geometry>
@@ -151,6 +151,15 @@
            </geometry>
          </visual>
        </link>
+
+      <include>
+          <uri>model://realsense_d455</uri>
+          <pose>0.22 0 0.08 1.57079632679 0 1.57079632679</pose>
+      </include>
+      <joint type="fixed" name="realsense_d455_joint">
+          <child>realsense_d455::camera_link</child>
+          <parent>chassis</parent>
+      </joint>
        <!-- Add motor for the left wheel -->
        <joint type="revolute" name="left_wheel_joint0">
          <pose>0 0 -0.03 0 0 0</pose>
