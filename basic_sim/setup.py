@@ -14,6 +14,8 @@ def get_data_files():
     files.extend(find_dir_files('launch'))
     files.extend(find_dir_files('worlds'))
     files.extend(find_dir_files('models'))
+    files.extend(find_dir_files('config'))
+
     return files
 
 def find_dir_files(dir_name):
