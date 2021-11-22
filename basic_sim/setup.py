@@ -1,15 +1,14 @@
 from setuptools import setup
 import os
 from glob import glob
-
-package_name = 'basic_sim'
+from basic_sim import PACKAGE_NAME
 
 def get_data_files():
     """ Returns the list of files that need to be copied to the install folder """
     files = [
         ('share/ament_index/resource_index/packages',
-            ['resource/' + package_name]),
-        ('share/' + package_name, ['package.xml']),
+            ['resource/' + PACKAGE_NAME]),
+        ('share/' + PACKAGE_NAME, ['package.xml']),
     ]
     files.extend(find_dir_files('hook'))
     files.extend(find_dir_files('launch'))
@@ -36,14 +35,14 @@ def find_dir_files(dir_name):
             # target_dir = filepath
         else:
             file_list.append(
-                (os.path.join('share', package_name, target_dir), glob(f"{glob_path}"))
+                (os.path.join('share', PACKAGE_NAME, target_dir), glob(f"{glob_path}"))
             )
     return file_list
 
 setup(
-    name=package_name,
+    name=PACKAGE_NAME,
     version='0.0.0',
-    packages=[package_name],
+    packages=[PACKAGE_NAME],
     data_files=get_data_files(),
     install_requires=['setuptools'],
     zip_safe=True,
@@ -54,7 +53,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'spawn_rocks = basic_sim.rock_spawner:main',
+            'spawn_model = basic_sim.ModelSpawner:main',
+            'spawn_rock = basic_sim.ModelSpawner:spawn_rock_main'
         ],
     },
 )

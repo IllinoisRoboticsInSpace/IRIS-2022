@@ -1,6 +1,7 @@
 """
-Demo for spawn_entity.
-Launches Gazebo and spawns a model
+empty_arena.launch.py
+
+
 """
 # A bunch of software packages that are needed to launch ROS2
 import os
@@ -12,28 +13,21 @@ from launch_ros.actions import Node
 from launch.actions import ExecuteProcess
 from ament_index_python.packages import get_package_share_directory
 
+from basic_sim import PACKAGE_NAME
+
 def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time', default='True')
     world_file_name = 'arena.world'
-    pkg_dir = get_package_share_directory('basic_sim')
+    pkg_dir = get_package_share_directory(PACKAGE_NAME)
 
-    os.environ["GAZEBO_MODEL_PATH"] = os.path.join(pkg_dir, 'models')
+    # os.environ["GAZEBO_MODEL_PATH"] = os.path.join(pkg_dir, 'models')
 
     world = os.path.join(pkg_dir, 'worlds', world_file_name)
-    launch_file_dir = os.path.join(pkg_dir, 'launch')
 
     gazebo = ExecuteProcess(
             cmd=['gazebo', '--verbose', world, '-s', 'libgazebo_ros_init.so', 
             '-s', 'libgazebo_ros_factory.so'],
             output='screen')
-
-    #GAZEBO_MODEL_PATH has to be correctly set for Gazebo to be able to find the model
-    #spawn_entity = Node(package='gazebo_ros', node_executable='spawn_entity.py',
-    #                    arguments=['-entity', 'demo', 'x', 'y', 'z'],
-    #                    output='screen')
-    # spawn_entity = Node(package='warehouse_robot_spawner_pkg', executable='spawn_demo',
-    #                     arguments=['WarehouseBot', 'demo', '-1.5', '-4.0', '0.0'],
-    #                     output='screen')
 
     return LaunchDescription([
         gazebo,
