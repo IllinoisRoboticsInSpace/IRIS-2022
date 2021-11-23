@@ -40,7 +40,7 @@
                  <!-- Box is 0.6 meters in length -->
                  <!-- 0.4 meters in width -->
                  <!-- 0.2 meters in height -->
-                 <size>0.6 0.4 0.2</size>
+                 <size>0.65 0.4 0.2</size>
                </box>
              </geometry>
            </collision>
@@ -59,7 +59,7 @@
                  <!-- Box is 0.6 meters in length -->
                  <!-- 0.4 meters in width -->
                  <!-- 0.4 meters in height -->
-                 <size>0.6 0.4 0.2</size>
+                 <size>0.65 0.4 0.2</size>
                </box>
              </geometry>
            </visual> 
@@ -232,7 +232,7 @@
         <wheel_diameter>0.2</wheel_diameter>
 
         <!-- limits -->
-        <max_wheel_torque>5</max_wheel_torque>
+        <max_wheel_torque>1</max_wheel_torque>
         <max_wheel_acceleration>0.2</max_wheel_acceleration>
 
         <!-- output -->
