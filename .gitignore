@@ -1,3 +1,5 @@
+# Arduino build folders
+arduino_build/
 # Editor Config Files
 .vscode/
 # Byte-compiled / optimized / DLL files
