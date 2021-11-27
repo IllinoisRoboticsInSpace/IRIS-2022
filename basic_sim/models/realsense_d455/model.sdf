@@ -23,13 +23,13 @@
         <!-- Camera Sensor Faces Positive X Direction(Red) by Default, modified to match mesh front direction -->
         <sensor type="depth" name="realsense_camera">
           <!-- Set always_on only sensor, not on plugin -->
-          <always_on>0</always_on>
+          <always_on>1</always_on>
 
           <!-- Set update_rate only sensor, not on plugin -->
           <update_rate>1</update_rate>
           <!-- Camera Specs based on https://www.intelrealsense.com/depth-camera-d455/ -->
           <camera name="camera">
-                  <pose>0 0 0 0 -1.57079632679 -1.57079632679</pose>
+            <pose>0 0 0 0 -1.57079632679 -1.57079632679</pose>
 
             <horizontal_fov>1.047198</horizontal_fov>
             <image>
@@ -85,6 +85,20 @@
 
              <min_depth>0.6</min_depth>
              <max_depth>4</max_depth>
+          </plugin>
+        </sensor>
+        <sensor type="imu" name="realsense_imu" >
+          <pose>0 0 0 0 -1.57079632679 -1.57079632679</pose>
+          <always_on>true</always_on>
+          <!-- Publish at 30 hz -->
+          <update_rate>1</update_rate>
+          <plugin name="my_imu_plugin" filename="libgazebo_ros_imu_sensor.so">
+            <ros>
+              <!-- Will publish to /camera/imu/sample -->
+              <namespace>/camera/imu</namespace>
+              <argument>~/out:=sample</argument>
+            </ros>
+            <!-- frame_name ommited, will be "camera_link" -->
           </plugin>
         </sensor>
     </link>
