@@ -10,25 +10,17 @@ from launch.substitutions import LaunchConfiguration, TextSubstitution
 
 def generate_launch_description():
     # joy_config = LaunchConfiguration('joy_config')
-    realsense = LaunchConfiguration('realsense2_camera')
+    # realsense = LaunchConfiguration('realsense2_camera')
 
-    config_filepath = os.path.join(get_package_share_directory('vision'), 
-        'config', 'xbox.config.yaml')
+    # config_filepath = os.path.join(get_package_share_directory('vision'), 
+    #     'config', 'xbox.config.yaml')
 
     return LaunchDescription([
-        #DeclareLaunchArgument('joy_config', default_value='xbox'),
-        DeclareLaunchArgument('realsense', default_value='/dev/input/js0'),
-        #Node(
-         #   package='joy', executable='joy_node', name='joy_node',
-          #  parameters=[{
-           #     'dev': joy_dev,
-            #    'deadzone': 0.3,
-             #   'autorepeat_rate': 20.0,
-            #}]),
-        # Node(
-        #     package='teleop_twist_joy', executable='teleop_node',
-        #     name='teleop_twist_joy_node', parameters=[config_filepath]),
+        # DeclareLaunchArgument('realsense', default_value='/dev/input/js0'),
         Node(
-            package='vision', executable='vision_subscriber_member_function',
-            name='VisionSubscriberMemberFunction', parameters=[]),
+            package='realsense2_camera', executable='realsense2_camera_node',
+            name='realsense2_camera_node'),
+        Node(
+            package='vision', executable='listener',
+            name='realsense_listener', parameters=[]),
     ])

@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'listener = vision.vision_subscriber_member_function:main',
+            'listener = vision.vision_subscriber:main',
         ],
     },
 )
