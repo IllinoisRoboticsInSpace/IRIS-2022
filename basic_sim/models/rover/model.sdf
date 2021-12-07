@@ -1,0 +1,248 @@
+<?xml version='1.0'?>
+<!--
+  Gazebo ROS differential drive plugin 
+
+  Try sending commands:
+
+    ros2 topic pub /demo/cmd_demo geometry_msgs/Twist '{linear: {x: 0.05}}' -1
+
+    ros2 topic pub /demo/cmd_demo geometry_msgs/Twist '{angular: {z: 0.1}}' -1
+
+  Try listening to odometry:
+
+    ros2 topic echo /demo/odom
+
+  Try listening to TF:
+
+    ros2 run tf2_ros tf2_echo odom chassis
+
+    ros2 run tf2_ros tf2_echo chassis right_wheel
+
+    ros2 run tf2_ros tf2_echo chassis left_wheel
+-->
+<sdf version='1.4'>
+  <model name="rover">  
+     <!-- If true, physics engine will ignore -->
+     <static>false</static>    
+       <!-- Add the rectangular base of the robot -->
+       <link name='chassis'>
+       
+         <!--Position of the center will be: -->
+         <!--x=0 meters, y=0 meters, z=0.05 meters-->
+         <!--Orientation of the center will be: -->
+         <!--Roll=0 rad, Pitch=0 rad, Yaw=0 rad -->
+         <pose>0 0 -0.05 0 0 0</pose>
+
+           <!-- Specify the shape for collisions -->
+           <collision name='collision'>
+             <geometry>
+               <box>
+                 <!-- Box is 0.6 meters in length -->
+                 <!-- 0.4 meters in width -->
+                 <!-- 0.2 meters in height -->
+                 <size>0.65 0.4 0.2</size>
+               </box>
+             </geometry>
+           </collision>
+
+           <!-- Specify the shape for visualization -->
+           <visual name='visual'>
+             <!-- <pose> 0 0 0.05 0 0 0 </pose> -->
+             <!-- <geometry>
+               <mesh>
+                 <uri>model://warehouse_robot/meshes/robot.dae</uri>
+                 <scale>0.9 0.5 0.5 </scale>
+               </mesh>
+             </geometry> -->
+             <geometry>
+               <box>
+                 <!-- Box is 0.6 meters in length -->
+                 <!-- 0.4 meters in width -->
+                 <!-- 0.4 meters in height -->
+                 <size>0.65 0.4 0.2</size>
+               </box>
+             </geometry>
+           </visual> 
+        </link>
+
+       <!-- Add the left wheel -->     
+       <link name="left_wheel0">
+         <!--Position of the center will be: -->
+         <!--x=2 meters, y=0.26 meters, z=0.1 meters-->
+         <!--Orientation of the center will be: -->
+         <!--Roll=0 rad, Pitch=90 deg, Yaw=90 deg -->
+         <pose>0.2 0.26 -0.1 0 1.5707 1.5707</pose>
+         <collision name="collision">
+           <geometry>
+             <cylinder>
+               <radius>.1</radius>
+               <length>.05</length>
+             </cylinder>
+           </geometry>
+         </collision>
+         <visual name="visual">
+           <geometry>
+             <cylinder>
+               <radius>.1</radius>
+               <length>.05</length>
+             </cylinder>
+           </geometry>
+         </visual>
+       </link>  
+       <link name="left_wheel1">
+         <!--Position of the center will be: -->
+         <!--x=2 meters, y=0.26 meters, z=0.1 meters-->
+         <!--Orientation of the center will be: -->
+         <!--Roll=0 rad, Pitch=90 deg, Yaw=90 deg -->
+         <pose>-0.2 0.26 -0.1 0 1.5707 1.5707</pose>
+         <collision name="collision">
+           <geometry>
+             <cylinder>
+               <radius>.1</radius>
+               <length>.05</length>
+             </cylinder>
+           </geometry>
+         </collision>
+         <visual name="visual">
+           <geometry>
+             <cylinder>
+               <radius>.1</radius>
+               <length>.05</length>
+             </cylinder>
+           </geometry>
+         </visual>
+       </link>  
+       <!-- Add the right wheel -->      
+       <link name="right_wheel0">
+        <pose>0.2 -0.26 -0.1 0 1.5707 1.5707</pose>
+         <collision name="collision">
+           <geometry>
+             <cylinder>
+               <radius>.1</radius>
+               <length>.05</length>
+             </cylinder>
+           </geometry>
+         </collision>
+         <visual name="visual">
+           <geometry>
+             <cylinder>
+               <radius>.1</radius>
+               <length>.05</length>
+             </cylinder>
+           </geometry>
+         </visual>
+       </link>
+       <link name="right_wheel1">
+        <pose>-0.2 -0.26 -0.1 0 1.5707 1.5707</pose>
+         <collision name="collision">
+           <geometry>
+             <cylinder>
+               <radius>.1</radius>
+               <length>.05</length>
+             </cylinder>
+           </geometry>
+         </collision>
+         <visual name="visual">
+           <geometry>
+             <cylinder>
+               <radius>.1</radius>
+               <length>.05</length>
+             </cylinder>
+           </geometry>
+         </visual>
+       </link>
+
+      <include>
+          <uri>model://realsense_d455</uri>
+          <pose>0.22 0 0.08 1.57079632679 0 1.57079632679</pose>
+      </include>
+      <joint type="fixed" name="realsense_d455_joint">
+          <child>realsense_d455::camera_link</child>
+          <parent>chassis</parent>
+      </joint>
+       <!-- Add motor for the left wheel -->
+       <joint type="revolute" name="left_wheel_joint0">
+         <pose>0 0 -0.03 0 0 0</pose>
+         <child>left_wheel0</child>
+         <parent>chassis</parent>
+         <axis>
+           <xyz>0 1 0</xyz>
+         </axis>
+       </joint>
+
+       <!-- Add motor for the right wheel -->
+       <joint type="revolute" name="right_wheel_joint0">
+         <pose>0 0 0.03 0 0 0</pose>
+         <child>right_wheel0</child>
+         <parent>chassis</parent>
+         <axis>
+           <xyz>0 1 0</xyz>
+         </axis>
+       </joint>
+             <!-- Add motor for the left wheel -->
+       <joint type="revolute" name="left_wheel_joint1">
+         <pose>0 0 -0.03 0 0 0</pose>
+         <child>left_wheel1</child>
+         <parent>chassis</parent>
+         <axis>
+           <xyz>0 1 0</xyz>
+         </axis>
+       </joint>
+
+       <!-- Add motor for the right wheel -->
+       <joint type="revolute" name="right_wheel_joint1">
+         <pose>0 0 0.03 0 0 0</pose>
+         <child>right_wheel1</child>
+         <parent>chassis</parent>
+         <axis>
+           <xyz>0 1 0</xyz>
+         </axis>
+       </joint>
+       <!-- Controls the differential drive robot -->
+       <!-- Useful docs: https://github.com/ros-simulation/gazebo_ros_pkgs/wiki/ROS-2-Migration:-Skid-Steer-drive -->
+      <plugin name='skid_steer_drive' filename='libgazebo_ros_diff_drive.so'>
+        <ros>
+          <!-- Set namespace -->
+          <namespace>/rover</namespace>
+
+          <!-- Remap default topics -->
+          <argument>cmd_vel:=cmd_vel</argument>
+          <argument>odom:=odom</argument>
+        </ros>
+
+        <!-- Update rate -->
+        <update_rate>100</update_rate>
+
+        <!-- Number of wheel pairs -->
+        <num_wheel_pairs>2</num_wheel_pairs>
+        
+        <!-- wheels0 -->
+        <left_joint>left_wheel_joint0</left_joint>
+        <right_joint>right_wheel_joint0</right_joint>
+
+        <!-- wheels1-->
+        <left_joint>left_wheel_joint1</left_joint>
+        <right_joint>right_wheel_joint1</right_joint>
+
+        <!-- kinematics -->
+        <wheel_separation>0.4</wheel_separation>
+        <wheel_separation>0.4</wheel_separation>
+
+        <wheel_diameter>0.2</wheel_diameter>
+        <wheel_diameter>0.2</wheel_diameter>
+
+        <!-- limits -->
+        <max_wheel_torque>1</max_wheel_torque>
+        <max_wheel_acceleration>0.2</max_wheel_acceleration>
+
+        <!-- output -->
+        <publish_odom>true</publish_odom>
+        <publish_odom_tf>true</publish_odom_tf>
+        <publish_wheel_tf>true</publish_wheel_tf>
+
+        <odometry_frame>odom</odometry_frame>
+        <robot_base_frame>chassis</robot_base_frame>
+
+      </plugin>
+  </model>
+</sdf>
