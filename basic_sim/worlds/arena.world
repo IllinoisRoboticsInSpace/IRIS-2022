@@ -1,3 +1,4 @@
+<?xml version='1.0'?>
 <sdf version='1.7'>
   <world name='default'>
 
@@ -18,6 +19,7 @@
     <!-- Rover Skid Steer Model -->
     <include>
       <uri>model://rover</uri>
+      <pose> -3 0 0 0 0 0 </pose>
     </include>
     
     <gravity>0 0 -9.8</gravity>
@@ -50,7 +52,6 @@
       <iterations>143328</iterations>
       <model name='arena_walls'>
         <pose>0 0 0 0 -0 0</pose>
-        <scale>1 1 0.25</scale>
       </model>
       <light name='sun'>
         <pose>0 0 10 0 -0 0</pose>
