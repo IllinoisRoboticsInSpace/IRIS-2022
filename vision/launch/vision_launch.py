@@ -23,4 +23,5 @@ def generate_launch_description():
         Node(
             package='vision', executable='listener',
             name='realsense_listener', parameters=[]),
+        
     ])
