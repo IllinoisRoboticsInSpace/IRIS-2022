@@ -29,7 +29,7 @@ class controllerToSerial(Node):
     #IMPORTANT FUNCTIONS:
     def power_to_bytes(self) -> bytes:      #converts self.power into bytes
         x = abs(self.power) + 256 * self.numMotor + 256 * 16
-        #x is two bits, power must be between -128 and 128.
+        #x is two bits, power must be between -127 and 127. probably.
         #first byte should be # of motor + b'00010000 <- makes sure non-inputs are not read as power (similar to CRC)
         #second byte is power (most significant bit is negative sign)
         if(self.power < 0):
@@ -39,7 +39,11 @@ class controllerToSerial(Node):
         self.arduino.write(self.power_to_bytes()) #writes power to serial0
 
     ####################################################################################################
-
+    def limitPower(self):
+        if(self.power > 127):
+            self.power = 127
+        elif(self.power < -127):
+            self.power = -127
     def display_power(self):
         returnMsg = String()
         returnMsg.data = 'Working: power = ' + str(self.power)
@@ -61,11 +65,12 @@ class controllerToSerial(Node):
 
         if(self.working and msg.axes[1]!=0): 
 
-            self.power = int(msg.axes[1] * 30)  #Set the power to left-joystick y-axis * 30 
+            self.power = int(msg.axes[1] * 60)  #Set the power to left-joystick y-axis * 60 
                                                 #(joystick value is in range [-1,1])
             if(msg.buttons[2]):                 
                 self.power *= 2                 # if 'X' is pressed, multiply power by 2 (for fun not necessary)
             
+            self.limitPower()
             self.display_power()
 
             self.sendPower()
