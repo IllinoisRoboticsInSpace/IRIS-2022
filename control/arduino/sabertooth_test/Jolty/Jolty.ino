@@ -1,11 +1,10 @@
 // Jolty Sample for Packet Serial
 // Copyright (c) 2012 Dimension Engineering LLC
 // See license.txt for license details.
-
-#include <Sabertooth.h>
 #include <SoftwareSerial.h>
+#include <Sabertooth.h>
 
-SoftwareSerial mySerial(19, 18); //RX, TX
+SoftwareSerial mySerial(19, 18);
 Sabertooth ST(128, mySerial); // The Sabertooth is on address 128. We'll name its object ST.
                     // If you've set up your Sabertooth on a different address, of course change
                     // that here. For how to configure address, etc. see the DIP Switch Wizard for
@@ -22,8 +21,7 @@ Sabertooth ST(128, mySerial); // The Sabertooth is on address 128. We'll name it
                                         
 void setup()
 {
-  mySerial.begin(9600);
-  Serial.begin(9600); // 9600 is the default baud rate for Sabertooth packet serial.
+  mySerial.begin(9600); // 9600 is the default baud rate for Sabertooth packet serial.
   ST.autobaud(); // Send the autobaud command to the Sabertooth controller(s).
                  // NOTE: *Not all* Sabertooth controllers need this command.
                  //       It doesn't hurt anything, but V2 controllers use an
@@ -31,25 +29,18 @@ void setup()
                  //       the baud rate instead of detecting with autobaud.
                  //
                  //       If you have a 2x12, 2x25 V2, 2x60 or SyRen 50, you can remove
-                 //       the autobaud line and save yourself two seconds of startup delay
-  ST.motor(1, 0);
+                 //       the autobaud line and save yourself two seconds of startup delay.
 }
 
 
-void loop() {
-  // put your main code here, to run repeatedly:
-  byte input[2];
-   
-  Serial.readBytes(input,2); 
-  Serial.print(input[1]);
-  int power = input[1] % 128;
-  if(input[0]-16 == 1){
-  if(input[1]/128 % 2 == 1){
-    power *= -1;
-  }
-  ST.motor(1, power);
-  }
-}
-void Stop(){
-  ST.stop();
+void loop()
+{
+  ST.motor(1, 23);  // Go forward at full power.
+  delay(2000);       // Wait 2 seconds.
+  ST.motor(1, 0);    // Stop.
+  delay(2000);       // Wait 2 seconds.
+  ST.motor(1, -23); // Reverse at full power.
+  delay(2000);       // Wait 2 seconds.
+  ST.motor(1, 0);    // Stop.
+  delay(2000);
 }

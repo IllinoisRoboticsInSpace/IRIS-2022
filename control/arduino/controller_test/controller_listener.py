@@ -30,7 +30,7 @@ class controller_listener(Node):
         self.subscription  # prevent unused variable warning
 
     def listener_callback(self, msg):
-        self.get_logger().info('I heard: "%s"' % msg.data)
+        self.get_logger().info('%s' % msg.data)
 
 
 def main(args=None):
