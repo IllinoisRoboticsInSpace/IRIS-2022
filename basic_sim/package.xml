@@ -11,11 +11,24 @@
   <exec_depend>std_msgs</exec_depend>
   <exec_depend>gazebo</exec_depend>
   <exec_depend>gazebo_ros_pkgs</exec_depend>
+  <exec_depend>joint_state_publisher</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>rviz2</exec_depend>
+  <exec_depend>xacro</exec_depend>
+  <exec_depend>robot_localization</exec_depend>
+  <exec_depend>navigation2</exec_depend>
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
   <test_depend>ament_pep257</test_depend>
   <test_depend>python3-pytest</test_depend>
+
+  <!--
+  <exec_depend>ros-galactic-navigation2</exec_depend>
+  <exec_depend>ros-galactic-nav2-bringup</exec_depend>
+  <exec_depend>ros-galactic-spatio-temporal-voxel-layer</exec_depend>
+  <build_depend>ros-galactic-slam-toolbox</build_depend>
+  -->
 
   <export>
     <build_type>ament_python</build_type>
