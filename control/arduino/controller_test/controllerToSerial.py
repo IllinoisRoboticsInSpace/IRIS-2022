@@ -57,7 +57,7 @@ class controllerToSerial(Node):
                 returnMsg = String()
                 returnMsg.data = 'Working'
                 self.publisher_.publish(returnMsg)
-        self.button0_prev = msg.buttons[0]              #makes above sure code runs only once
+        self.button0_prev = msg.buttons[0]              #makes sure above code runs only once
 
         if(self.working and msg.axes[1]!=0): 
 
