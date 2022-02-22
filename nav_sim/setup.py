@@ -1,6 +1,6 @@
 from setuptools import setup
 
-package_name = 'nav-sim'
+package_name = 'nav_sim'
 
 setup(
     name=package_name,
@@ -14,7 +14,7 @@ setup(
     install_requires=['setuptools'],
     zip_safe=True,
     maintainer='iris',
-    maintainer_email='iris@todo.todo',
+    maintainer_email='teodor.tch@gmail.com',
     description='TODO: Package description',
     license='TODO: License declaration',
     tests_require=['pytest'],
