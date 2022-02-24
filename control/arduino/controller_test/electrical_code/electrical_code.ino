@@ -4,6 +4,7 @@
 SoftwareSerial mySerial1(19,18);
 SoftwareSerial mySerial2(17,16);
 Sabertooth ST[2] = { Sabertooth(128,mySerial1), Sabertooth(129,mySerial2) }; //128 ->Left and right Drive, 129->Bucket Ladder
+byte OdroidIn[2];
 
 #define dir_1 22
 #define pwm_1 2
@@ -22,7 +23,7 @@ void setup()
 {
   SabertoothTXPinSerial.begin(9600);
   Sabertooth::autobaud(SabertoothTXPinSerial);
-
+  mySerial1.begin(9600);
   Serial.begin(9600); //serial input from Odroid.
   
 
@@ -41,8 +42,6 @@ pinMode(dir_4,OUTPUT);
 
 void loop()
 {
-
-   byte OdroidIn[2];
    
   Serial.readBytes(OdroidIn,2); 
    unsigned int OdroidInInt = OdroidIn[1]+OdroidIn[0]*256;
@@ -109,7 +108,7 @@ void loop()
   case 5 :
       digitalWrite(dir_3, (int)(OdroidIn[1]/128)); //controls the direction the motor;
       analogWrite(pwm_3, power*2);
-      break; /
+      break;
   
    case 6 :
       digitalWrite(dir_4, (int)(OdroidIn[1]/128)); //controls the direction the motor;
