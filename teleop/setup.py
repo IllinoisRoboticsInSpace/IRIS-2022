@@ -27,6 +27,7 @@ setup(
     entry_points={
         'console_scripts': [
             'teleop_node = teleop.teleop_node:main', # name = package.file:method
+            'twist_serial = teleop.twist_serial:main'
         ],
     },
 )

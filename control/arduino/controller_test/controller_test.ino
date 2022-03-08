@@ -46,13 +46,11 @@ void loop() {
   byte input[2];
    
   Serial.readBytes(input,2); 
-   
    unsigned int OdroidInInt = input[1]+input[0]*256;
    unsigned int CRC = 18;
    unsigned int msg = OdroidInInt % 2048;
    unsigned int checksum = OdroidInInt / 2048;
    unsigned int curr = msg*32 + checksum;
-
    int a, index;
    while (curr >= 32) {
     index = largestOneIndex(curr);
@@ -62,6 +60,7 @@ void loop() {
    if (curr) {
     // CRC came back bad
     // do some error handling here??
+    //Serial.print("error:");
    }else{
   int power = input[1] % 128;
   if(input[1]/128 % 2 == 1){

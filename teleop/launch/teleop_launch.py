@@ -31,4 +31,7 @@ def generate_launch_description():
         Node(
             package='teleop', executable='teleop_node',
             name='TeleopNode', parameters=[]),
+        Node(
+            package='teleop', executable='twist_serial',
+            name='twist_serial', parameters=[]),
     ])
