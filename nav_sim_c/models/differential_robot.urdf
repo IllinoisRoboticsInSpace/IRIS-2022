@@ -1,9 +1,10 @@
 <?xml version="1.0"?>
 <robot name="differential_robot" xmlns:xacro="http://ros.org/wiki/xacro">
-    <!-- Define robot constants -->
-    <xacro:property name="base_width" value="0.31"/><!-- Along x axis -->
-    <xacro:property name="base_length" value="0.42"/><!-- Along y axis -->
-    <xacro:property name="base_height" value="0.18"/><!-- Along z axis -->
+    <!-- Define robot constants in meters-->
+    <xacro:property name="base_inner_width" value="0.25"/><!-- Along x axis -->
+    <xacro:property name="base_outer_width" value="0.5"/><!-- Along x axis -->
+    <xacro:property name="base_length" value="1.0"/><!-- Along y axis -->
+    <xacro:property name="base_height" value="0.5"/><!-- Along z axis -->
 
     <xacro:property name="wheel_radius" value="0.10"/>
     <xacro:property name="wheel_width" value="0.04"/>
