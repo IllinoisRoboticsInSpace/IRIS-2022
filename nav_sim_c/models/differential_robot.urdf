@@ -6,7 +6,7 @@
     <xacro:property name="base_outer_width" value="0.6"/><!-- Along x axis -->
     <xacro:property name="base_length" value="1.0"/><!-- Along y axis -->
     <xacro:property name="base_height" value="0.5"/><!-- Along z axis -->
-    <xacro:property name="base_ground_height_offset" value="0.01"/><!-- Along z axis -->
+    <xacro:property name="base_ground_height_zoffset" value="0.01"/><!-- Along z axis -->
 
     <xacro:property name="wheel_radius" value="0.10"/>
     <xacro:property name="wheel_width" value="0.04"/>
@@ -38,7 +38,7 @@
     <joint name="base_joint" type="fixed">
         <parent link="base_link"/>
         <child link="base_footprint"/>
-        <origin xyz="0.0 0.0 ${-(wheel_radius+wheel_zoff)}" rpy="0 0 0"/>
+        <origin xyz="0.0 0.0 ${-(base_height / 2 + base_ground_height_zoffset)}" rpy="0 0 0"/>
     </joint>
 
     <!-- Wheels -->
