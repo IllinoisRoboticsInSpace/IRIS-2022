@@ -1,18 +1,22 @@
 <?xml version="1.0"?>
 <robot name="differential_robot" xmlns:xacro="http://ros.org/wiki/xacro">
     <!-- Define robot constants in meters-->
-    <xacro:property name="base_inner_width" value="0.5"/><!-- Along x axis -->
-    <xacro:property name="base_outer_width" value="0.6"/><!-- Along x axis -->
-    <xacro:property name="base_length" value="1.0"/><!-- Along y axis -->
-    <xacro:property name="base_height" value="0.5"/><!-- Along z axis -->
-    <xacro:property name="base_ground_height_zoffset" value="0.01"/><!-- Along z axis -->
+    <xacro:property name="base_inner_width" value="0.281432"/><!-- Along x axis -->
+    <xacro:property name="base_outer_width" value="0.5842"/><!-- Along x axis -->
+    <xacro:property name="base_length" value="0.917575"/><!-- Along y axis -->
+    <xacro:property name="base_height" value="0.509778"/><!-- Along z axis -->
+    <xacro:property name="base_ground_height_zoffset" value="0.054356"/><!-- Along z axis -->
 
-    <xacro:property name="wheel_radius" value="0.10"/>
-    <xacro:property name="wheel_width" value="0.04"/>
-    <xacro:property name="wheel_to_chassis_gap" value="0.025"/><!-- Along x axis -->
-    <xacro:property name="wheel_zoff" value="0.05"/>
-    <xacro:property name="wheel_ygap" value="0.4"/><!-- Along y axis distance between axis of rotation-->
-    <xacro:property name="wheel_xgap" value="0.12"/>
+    <xacro:property name="wheel_radius" value="0.087757"/>
+    <xacro:property name="wheel_width" value="0.0956564"/>
+    <xacro:property name="wheel_to_chassis_gap" value="0.054864"/><!-- Along x axis -->
+    <xacro:property name="wheel_ygap" value="0.540004"/><!-- Along y axis distance between axis of rotation-->
+    <xacro:property name="wheel_xgap" value="0.39116"/>
+
+    <xacro:property name="camera_z" value="0.38735"/><!-- Along z axis distance between bar and bottom of frame-->
+    <xacro:property name="camera_y" value="0.136398"/><!-- From axel of the front wheel to the y value of the frame-->
+    <xacro:property name="camera_y_from_center_of_robot" value="${camera_y + wheel_ygap/2}"/>
+
 
     <!-- Robot Base -->
     <link name="base_link">
