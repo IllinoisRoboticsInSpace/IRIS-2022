@@ -20,7 +20,7 @@
 
     <!-- Define inertial robot constants in kg-->
     <xacro:property name="wheel_mass" value="1.0"/>
-    <xacro:property name="robot_mass" value="${10.0 - wheel_mass}"/>
+    <xacro:property name="base_mass" value="${10.0 - wheel_mass}"/>
 
     <!-- Define intertial property macros  -->
     <xacro:macro name="box_inertia" params="m w h d">
@@ -57,7 +57,7 @@
             </geometry>
         </collision>
 
-        <xacro:box_inertia m="15" w="${base_inner_width}" d="${base_length}" h="${base_height}"/>
+        <xacro:box_inertia m="${base_mass}" w="${base_inner_width}" d="${base_length}" h="${base_height}"/>
     </link>
 
     <!-- Robot Footprint -->
@@ -78,9 +78,18 @@
                     <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
                 </geometry>
                 <material name="Gray">
-                <color rgba="0.5 0.5 0.5 1.0"/>
+                    <color rgba="0.5 0.5 0.5 1.0"/>
                 </material>
             </visual>
+
+            <collision>
+                <origin xyz="0 0 0" rpy="0 ${pi/2} 0"/> 
+                <geometry>
+                  <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+                </geometry>
+            </collision>
+        
+            <xacro:cylinder_inertia m="${wheel_mass}" r="${wheel_radius}" h="${wheel_width}"/>
         </link>
 
         <joint name="${name}_y_plus_joint" type="continuous">
@@ -100,6 +109,15 @@
                 <color rgba="0.5 0.5 0.5 1.0"/>
                 </material>
             </visual>
+
+            <collision>
+                <origin xyz="0 0 0" rpy="0 ${pi/2} 0"/> 
+                <geometry>
+                  <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+                </geometry>
+            </collision>
+
+            <xacro:cylinder_inertia m="${wheel_mass}" r="${wheel_radius}" h="${wheel_width}"/>
         </link>
 
         <joint name="${name}_y_minus_joint" type="continuous">
