@@ -17,6 +17,22 @@
     <xacro:property name="camera_y" value="0.136398"/><!-- From axel of the front wheel to the y value of the frame-->
     <xacro:property name="camera_y_from_center_of_robot" value="${camera_y + wheel_ygap/2}"/>
 
+    <!-- Define intertial property macros  -->
+    <xacro:macro name="box_inertia" params="m w h d">
+        <inertial>
+        <origin xyz="0 0 0" rpy="${pi/2} 0 ${pi/2}"/>
+        <mass value="${m}"/>
+        <inertia ixx="${(m/12) * (h*h + d*d)}" ixy="0.0" ixz="0.0" iyy="${(m/12) * (w*w + d*d)}" iyz="0.0" izz="${(m/12) * (w*w + h*h)}"/>
+        </inertial>
+    </xacro:macro>
+
+    <xacro:macro name="cylinder_inertia" params="m r h">
+        <inertial>
+        <origin xyz="0 0 0" rpy="${pi/2} 0 0" />
+        <mass value="${m}"/>
+        <inertia ixx="${(m/12) * (3*r*r + h*h)}" ixy = "0" ixz = "0" iyy="${(m/12) * (3*r*r + h*h)}" iyz = "0" izz="${(m/2) * (r*r)}"/>
+        </inertial>
+    </xacro:macro>
 
     <!-- Robot Base -->
     <link name="base_link">
