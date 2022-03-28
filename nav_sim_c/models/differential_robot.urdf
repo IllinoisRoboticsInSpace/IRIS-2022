@@ -13,24 +13,29 @@
     <xacro:property name="wheel_ygap" value="0.540004"/><!-- Along y axis distance between axis of rotation-->
     <xacro:property name="wheel_xgap" value="0.39116"/>
 
+    <!-- Camera positioning in meters-->
     <xacro:property name="camera_z" value="0.38735"/><!-- Along z axis distance between bar and bottom of frame-->
     <xacro:property name="camera_y" value="0.136398"/><!-- From axel of the front wheel to the y value of the frame-->
     <xacro:property name="camera_y_from_center_of_robot" value="${camera_y + wheel_ygap/2}"/>
 
+    <!-- Define inertial robot constants in kg-->
+    <xacro:property name="wheel_mass" value="1.0"/>
+    <xacro:property name="robot_mass" value="${10.0 - wheel_mass}"/>
+
     <!-- Define intertial property macros  -->
     <xacro:macro name="box_inertia" params="m w h d">
         <inertial>
-        <origin xyz="0 0 0" rpy="${pi/2} 0 ${pi/2}"/>
-        <mass value="${m}"/>
-        <inertia ixx="${(m/12) * (h*h + d*d)}" ixy="0.0" ixz="0.0" iyy="${(m/12) * (w*w + d*d)}" iyz="0.0" izz="${(m/12) * (w*w + h*h)}"/>
+            <origin xyz="0 0 0" rpy="${pi/2} 0 ${pi/2}"/>
+            <mass value="${m}"/>
+            <inertia ixx="${(m/12) * (h*h + d*d)}" ixy="0.0" ixz="0.0" iyy="${(m/12) * (w*w + d*d)}" iyz="0.0" izz="${(m/12) * (w*w + h*h)}"/>
         </inertial>
     </xacro:macro>
 
     <xacro:macro name="cylinder_inertia" params="m r h">
         <inertial>
-        <origin xyz="0 0 0" rpy="${pi/2} 0 0" />
-        <mass value="${m}"/>
-        <inertia ixx="${(m/12) * (3*r*r + h*h)}" ixy = "0" ixz = "0" iyy="${(m/12) * (3*r*r + h*h)}" iyz = "0" izz="${(m/2) * (r*r)}"/>
+            <origin xyz="0 0 0" rpy="${pi/2} 0 0" />
+            <mass value="${m}"/>
+            <inertia ixx="${(m/12) * (3*r*r + h*h)}" ixy = "0" ixz = "0" iyy="${(m/12) * (3*r*r + h*h)}" iyz = "0" izz="${(m/2) * (r*r)}"/>
         </inertial>
     </xacro:macro>
 
@@ -41,10 +46,18 @@
             <geometry>
                 <box size="${base_inner_width} ${base_length} ${base_height}"/>
             </geometry>
-        <material name="UIUCBlue">
-            <color rgba=".19 .41 .75 1.0"/>
-        </material>
+            <material name="UIUCBlue">
+                <color rgba=".19 .41 .75 1.0"/>
+            </material>
         </visual>
+
+        <collision>
+            <geometry>
+              <box size="${base_inner_width} ${base_length} ${base_height}"/>
+            </geometry>
+        </collision>
+
+        <xacro:box_inertia m="15" w="${base_inner_width}" d="${base_length}" h="${base_height}"/>
     </link>
 
     <!-- Robot Footprint -->
@@ -59,15 +72,15 @@
     <!-- Wheels -->
     <xacro:macro name="wheel" params="name y_reflect">
         <link name="${name}_y_plus_link">
-        <visual>
-            <origin xyz="0 0 0" rpy="0 ${pi/2} 0"/>
-            <geometry>
-                <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
-            </geometry>
-            <material name="Gray">
-            <color rgba="0.5 0.5 0.5 1.0"/>
-            </material>
-        </visual>
+            <visual>
+                <origin xyz="0 0 0" rpy="0 ${pi/2} 0"/>
+                <geometry>
+                    <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+                </geometry>
+                <material name="Gray">
+                <color rgba="0.5 0.5 0.5 1.0"/>
+                </material>
+            </visual>
         </link>
 
         <joint name="${name}_y_plus_joint" type="continuous">
@@ -87,7 +100,7 @@
                 <color rgba="0.5 0.5 0.5 1.0"/>
                 </material>
             </visual>
-            </link>
+        </link>
 
         <joint name="${name}_y_minus_joint" type="continuous">
             <parent link="base_link"/>
