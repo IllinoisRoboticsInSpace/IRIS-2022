@@ -27,6 +27,12 @@
     - Control the rover model with your keyboard
     - Start at a low speed to prevent rover from jumping all over the place
 - Terminal 3: `rviz2 -d basic_sim/resource/rover_depth_camera_view.rviz` to view rover's depth camera data
+
+### Nav2 Simulation Package Usage
+- Launched the robot model viewer
+  - `ros2 launch nav_sim_c display.launch.py`
+
+
 ### End Package Folder Structure
 ```
 ~/colcon_ws/
