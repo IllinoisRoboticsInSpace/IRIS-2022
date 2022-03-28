@@ -50,7 +50,30 @@ class MinimalSubscriber(Node):
             [0, 1, 0]
         ]).reshape(3,4)
         
-        num_pts = pointcloud_array.shape[0] 
+       # num_pts = pointcloud_array.shape[0] 
+        self.get_logger().info(f'pc shape: {pointcloud_array.shape}')
+        # get array of z-coordinates
+        z_pts = pointcloud_array[:, 2:3]
+        self.get_logger().info(f'z array: {z_pts[0]}')
+        # find the mean of the z-coordinates
+        z_mean = np.mean(z_pts)
+        self.get_logger().info(f'z mean: {z_mean}')
+        # find the standard deviation of the z-coordinates
+        sd = np.std(z_pts)
+        self.get_logger().info(f'sd: {sd}')
+        
+        boundary = z_mean + 0.5 * sd
+        
+        # find the z-coordinates that are less than 1.5 sd of the mean
+        ground = np.where((z_pts < boundary))
+        self.get_logger().info(f'ground: {ground[0]}')
+        z_pts = np.delete(z_pts, ground)
+        self.get_logger().info(f'z_pts: {z_pts.shape}')
+        pointcloud_array = np.delete(pointcloud_array, ground, axis = 0)
+
+        self.get_logger().info(f'pc array w/o ground shape: {pointcloud_array.shape}')
+        num_pts = pointcloud_array.shape[0]
+
         # add row of ones to have correct dimensions to do matrix multiplication
         pts_3d = np.vstack((pointcloud_array.T[:3], np.ones(num_pts)))
         self.get_logger().info(f'3D array: {pts_3d.shape}')
