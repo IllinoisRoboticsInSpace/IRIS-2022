@@ -1,3 +1,4 @@
+from statistics import covariance
 import rclpy
 from rclpy.node import Node
 from cv_bridge import CvBridge # Package to convert between ROS and OpenCV Images
@@ -67,12 +68,15 @@ class MinimalSubscriber(Node):
         # find the z-coordinates that are less than 1.5 sd of the mean
         ground = np.where((z_pts < boundary))
         self.get_logger().info(f'ground: {ground[0]}')
-        z_pts = np.delete(z_pts, ground)
-        self.get_logger().info(f'z_pts: {z_pts.shape}')
+        #z_pts = np.delete(z_pts, ground)
+        #self.get_logger().info(f'z_pts: {z_pts.shape}')
+        # delete the points that are the ground
         pointcloud_array = np.delete(pointcloud_array, ground, axis = 0)
-
         self.get_logger().info(f'pc array w/o ground shape: {pointcloud_array.shape}')
         num_pts = pointcloud_array.shape[0]
+
+        # refine the ground points using PCA
+        covariance_matrix = np.cov(ground)
 
         # add row of ones to have correct dimensions to do matrix multiplication
         pts_3d = np.vstack((pointcloud_array.T[:3], np.ones(num_pts)))
