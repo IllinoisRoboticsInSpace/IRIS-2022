@@ -61,7 +61,9 @@
     </link>
 
     <!-- Robot Footprint -->
-    <link name="base_footprint"/>
+    <link name="base_footprint">
+      <xacro:box_inertia m="0" w="0" d="0" h="0"/>
+    </link>
 
     <joint name="base_joint" type="fixed">
         <parent link="base_link"/>
@@ -220,6 +222,34 @@
             </linear_acceleration>
           </imu>
         </sensor>
+      </gazebo>
+
+      <gazebo>
+        <plugin name='diff_drive' filename='libgazebo_ros_diff_drive.so'>
+          <ros>
+            <namespace>/demo</namespace>
+          </ros>
+      
+          <!-- wheels -->
+          <left_joint>drivewhl_l_y_plus_joint</left_joint>
+          <right_joint>drivewhl_r_y_plus_joint</right_joint>
+      
+          <!-- kinematics -->
+          <wheel_separation>0.39116</wheel_separation>
+          <wheel_diameter>0.175514</wheel_diameter>
+      
+          <!-- limits -->
+          <max_wheel_torque>20</max_wheel_torque>
+          <max_wheel_acceleration>1.0</max_wheel_acceleration>
+      
+          <!-- output -->
+          <publish_odom>true</publish_odom>
+          <publish_odom_tf>false</publish_odom_tf>
+          <publish_wheel_tf>true</publish_wheel_tf>
+      
+          <odometry_frame>odom</odometry_frame>
+          <robot_base_frame>base_link</robot_base_frame>
+        </plugin>
       </gazebo>
 
 </robot>
