@@ -24,7 +24,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'twist_serial = jetson.twist_serial:main'
+            'twist_serial = jetson.twist_serial:main',
+            'webcam_pub = jetson.webcam_pub:main'
         ],
     },
 )

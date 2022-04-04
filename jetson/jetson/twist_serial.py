@@ -70,8 +70,8 @@ class twist_serial(Node):
         #self.publisher_.publish(returnMsg)
 
     def twist_callback(self, msg: Twist):
-        x = 60.0 * max(min(msg.linear.x, 1.0), -1.0)
-        z = 60.0 * max(min(msg.angular.z, 1.0), -1.0)
+        x = 120.0 * max(min(msg.linear.x, 1.0), -1.0)
+        z = 120.0 * max(min(msg.angular.z, 1.0), -1.0)
         self.power[0] = int((x - z)/2)
         self.power[1] = int((x + z)/2)
         self.limitPower()
