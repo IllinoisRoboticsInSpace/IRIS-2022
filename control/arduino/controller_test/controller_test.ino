@@ -3,11 +3,7 @@
 // See license.txt for license details.
 
 #include <Sabertooth.h>
-#include <SoftwareSerial.h>
-
-SoftwareSerial mySerial(19, 18); //RX, TX
-SoftwareSerial mySerial2(17,16);
-Sabertooth ST(128, mySerial); // The Sabertooth is on address 128. We'll name its object ST.
+Sabertooth ST(128, Serial1); // The Sabertooth is on address 128. We'll name its object ST.
                     // If you've set up your Sabertooth on a different address, of course change
                     // that here. For how to configure address, etc. see the DIP Switch Wizard for
                     //   Sabertooth - http://www.dimensionengineering.com/datasheets/SabertoothDIPWizard/start.htm
@@ -20,13 +16,11 @@ Sabertooth ST(128, mySerial); // The Sabertooth is on address 128. We'll name it
                     //
                     // In this sample, hardware serial TX connects to S1.
                     // See the SoftwareSerial example in 3.Advanced for how to use other pins.
-Sabertooth ST2(128, mySerial2);
                                         
 void setup()
 {
-  mySerial.begin(9600);
-  mySerial2.begin(9600);
   Serial.begin(9600); // 9600 is the default baud rate for Sabertooth packet serial.
+  Serial1.begin(9600);
   ST.autobaud(); // Send the autobaud command to the Sabertooth controller(s).
                  // NOTE: *Not all* Sabertooth controllers need this command.
                  //       It doesn't hurt anything, but V2 controllers use an
@@ -36,8 +30,6 @@ void setup()
                  //       If you have a 2x12, 2x25 V2, 2x60 or SyRen 50, you can remove
                  //       the autobaud line and save yourself two seconds of startup delay
   ST.motor(1, 0);
-  ST2.autobaud();
-  ST2.motor(1,0);
 }
 
 
@@ -45,7 +37,8 @@ void loop() {
   // put your main code here, to run repeatedly:
   byte input[2];
    
-  Serial.readBytes(input,2); 
+  Serial.readBytes(input,2);
+  //Serial.write(input[1]);
    unsigned int OdroidInInt = input[1]+input[0]*256;
    unsigned int CRC = 18;
    unsigned int msg = OdroidInInt % 2048;
@@ -76,7 +69,6 @@ void loop() {
 }
 void Stop(){
   ST.stop();
-  ST2.stop();
 }
 int largestOneIndex(unsigned int curr) {
   int i = 15;
