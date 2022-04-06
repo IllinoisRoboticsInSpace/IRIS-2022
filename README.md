@@ -21,7 +21,7 @@
     - Launches everything, including joystick nodes and teleop node
 
 ### Simulation Package Usage
-- Terminal 1: `ros2 launch basic_sim arena_world.launch.py`
+- Terminal 1: `ros2 launch basic_sim arena.launch.py`
     - Launches gazebo with the basic arena world(Skid-steer model rover + arena walls + flat ground)
 - Terminal 2: `ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args --remap /cmd_vel:=/rover/cmd_vel`
     - Control the rover model with your keyboard

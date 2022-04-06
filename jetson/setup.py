@@ -2,15 +2,13 @@ from setuptools import setup
 import os
 from glob import glob
 
-package_name = 'teleop'
+package_name = 'jetson'
 
 setup(
     name=package_name,
-    version='1.0.0',
+    version='0.0.0',
     packages=[package_name],
     data_files=[
-        (f'share/{package_name}/config',
-            ['resource/xbox.config.yaml']),
         ('share/ament_index/resource_index/packages',
             [f'resource/{package_name}']),
         ('share/' + package_name, ['package.xml']),
@@ -21,12 +19,14 @@ setup(
     zip_safe=True,
     maintainer='iris-autonomous',
     maintainer_email='iris@illinois.edu',
-    description='Teleop package for IRIS-2022',
+    description='Jetson package for IRIS-2022',
     license='TODO: License declaration',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'teleop_node = teleop.teleop_node:main', # name = package.file:method/
+            'twist_serial = jetson.twist_serial:main',
+            'image_pub = jetson.image_pub:main',
+            'image_sub = jetson.image_sub:main'
         ],
     },
 )
