@@ -25,7 +25,8 @@ setup(
     entry_points={
         'console_scripts': [
             'twist_serial = jetson.twist_serial:main',
-            'webcam_pub = jetson.webcam_pub:main'
+            'image_pub = jetson.image_pub:main',
+            'image_sub = jetson.image_sub:main'
         ],
     },
 )

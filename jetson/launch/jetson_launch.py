@@ -10,4 +10,8 @@ def generate_launch_description():
         Node(
             package='jetson', executable='twist_serial',
             name='twist_serial'),
+        Node(
+            package='jetson', executable='image_pub',
+            name='arducam_img_publisher'
+        )
     ])
