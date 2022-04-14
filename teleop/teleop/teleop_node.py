@@ -20,9 +20,9 @@ class TeleopNode(Node):
     def joystick_callback(self, msg: Joy):
         self.publisher.publish(Twist(
             linear=Vector3(x=msg.axes[1], y=0.0, z=0.0),
-            angular=Vector3(x=0.0, y=0.0, z=msg.axes[3])
+            angular=Vector3(x=0.0, y=0.0, z=msg.axes[0])
         ))
-        # self.get_logger().info(str(msg.axes[1]))
+        #self.get_logger().info(str(msg.axes[1]))
 
     # def joystick_twist_callback(self, msg: Twist):
     #     linear: Vector3 = msg.linear

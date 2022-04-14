@@ -3,7 +3,7 @@
 // See license.txt for license details.
 
 #include <Sabertooth.h>
-Sabertooth ST(128, Serial1); // The Sabertooth is on address 128. We'll name its object ST.
+Sabertooth ST(130, Serial1); // The Sabertooth is on address 130. We'll name its object ST.
                     // If you've set up your Sabertooth on a different address, of course change
                     // that here. For how to configure address, etc. see the DIP Switch Wizard for
                     //   Sabertooth - http://www.dimensionengineering.com/datasheets/SabertoothDIPWizard/start.htm
@@ -30,6 +30,7 @@ void setup()
                  //       If you have a 2x12, 2x25 V2, 2x60 or SyRen 50, you can remove
                  //       the autobaud line and save yourself two seconds of startup delay
   ST.motor(1, 0);
+  ST.motor(2, 0);
 }
 
 
@@ -61,7 +62,7 @@ void loop() {
   }
   int motorNumber = input[0]%8;
   if(motorNumber == 1){
-  ST.motor(1, power);
+  ST.motor(1, -power);
   }else if(motorNumber == 2){
   ST.motor(2, power);
   }

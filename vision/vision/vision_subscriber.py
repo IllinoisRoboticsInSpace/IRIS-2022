@@ -1,4 +1,3 @@
-from statistics import covariance
 import rclpy
 from rclpy.node import Node
 from cv_bridge import CvBridge # Package to convert between ROS and OpenCV Images
@@ -14,7 +13,7 @@ class MinimalSubscriber(Node):
         super().__init__('minimal_vision_subscriber')
         self.subscription = self.create_subscription(
            Image,
-            'camera/color/image_raw',
+            '/camera/color/image_raw',
             self.listener_callback,
             10)
 
@@ -54,7 +53,7 @@ class MinimalSubscriber(Node):
        # num_pts = pointcloud_array.shape[0] 
         self.get_logger().info(f'pc shape: {pointcloud_array.shape}')
         # get array of z-coordinates
-        z_pts = pointcloud_array[:, 2:3]
+        z_pts = pointcloud_array[:, 2]
         self.get_logger().info(f'z array: {z_pts[0]}')
         # find the mean of the z-coordinates
         z_mean = np.mean(z_pts)
@@ -71,12 +70,12 @@ class MinimalSubscriber(Node):
         #z_pts = np.delete(z_pts, ground)
         #self.get_logger().info(f'z_pts: {z_pts.shape}')
         # delete the points that are the ground
-        pointcloud_array = np.delete(pointcloud_array, ground, axis = 0)
+        # pointcloud_array = np.delete(pointcloud_array, ground, axis = 0)
         self.get_logger().info(f'pc array w/o ground shape: {pointcloud_array.shape}')
         num_pts = pointcloud_array.shape[0]
 
         # refine the ground points using PCA
-        covariance_matrix = np.cov(ground)
+        # covariance_matrix = np.cov(ground)
 
         # add row of ones to have correct dimensions to do matrix multiplication
         pts_3d = np.vstack((pointcloud_array.T[:3], np.ones(num_pts)))

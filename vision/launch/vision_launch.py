@@ -17,11 +17,12 @@ def generate_launch_description():
 
     return LaunchDescription([
         # DeclareLaunchArgument('realsense', default_value='/dev/input/js0'),
-        Node(
+            Node(
             package='realsense2_camera', executable='realsense2_camera_node',
             name='realsense2_camera_node'),
-        Node(
+            # arguments=['--ros-args -p enable_pointcloud:=true']),
+            Node(
             package='vision', executable='listener',
-            name='realsense_listener', parameters=[]),
-        
+            name='realsense_listener', output='screen'),
+
     ])
