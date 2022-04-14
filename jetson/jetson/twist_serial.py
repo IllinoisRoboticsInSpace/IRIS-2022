@@ -16,7 +16,7 @@ class twist_serial(Node):
             Twist, '/rover/cmd_vel', self.twist_callback, 10) #subscribes to cmd_vel topic
         self.get_logger().info(f"Created node {self.get_name()}")
 
-        #self.publisher_ = self.create_publisher(String, 'controller', 10) #publishes to 'controller' topic
+        self.publisher_ = self.create_publisher(String, 'controller', 10) #publishes to 'controller' topic
 
         self.arduino = serial.Serial(port = '/dev/ttyACM0',baudrate = 9600, timeout = .1) #initializes arduino serial port. make sure baudrate is same for arduino and python code
 
@@ -33,7 +33,7 @@ class twist_serial(Node):
             while (i >= 0):
                 if (curr & int(1 << i)):
                     break
-                i-=1
+                i-= 1
             return i
         x = int(abs(self.power[i]) + 256 * self.numMotor[i])
         #x is two bits, power must be between -127 and 127. probably.
@@ -67,15 +67,17 @@ class twist_serial(Node):
     def display_power(self, i):
         returnMsg = String()
         returnMsg.data = 'power = ' + str(self.power[i]) + ' bytes: ' + str(self.power_to_bytes(i))
-        #self.publisher_.publish(returnMsg)
+        self.publisher_.publish(returnMsg)
 
     def twist_callback(self, msg: Twist):
-        x = 120.0 * max(min(msg.linear.x, 1.0), -1.0)
-        z = 120.0 * max(min(msg.angular.z, 1.0), -1.0)
-        self.power[0] = int((x - z)/2)
-        self.power[1] = int((x + z)/2)
+        x = max(min(msg.linear.x, 1.0), -1.0)
+        z = max(min(msg.angular.z, 1.0), -1.0)
+        scale = 80
+        self.power[0] = -int((x - z) * scale) 
+        self.power[1] = int((x + z) * scale)
         self.limitPower()
         self.display_power(0)
+        #self.get_logger().info(f"power:{self.power}")
         self.sendPower()
         
 
